@@ -1,0 +1,752 @@
+/* =========================================================
+   STAGE NAVIGATION
+   Shows ONLY: 1 — 2 — 3
+   ========================================================= */
+
+.stage-nav {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 8px 20px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.97) 0%,
+    rgba(240, 253, 244, 0.98) 100%
+  );
+
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 16px;
+
+  box-shadow:
+    0 -4px 24px rgba(22, 101, 52, 0.08),
+    0 8px 32px rgba(22, 101, 52, 0.06);
+
+  animation: stageNavSlideUp 0.5s
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* =========================================================
+   TRANSITION
+   ========================================================= */
+
+.stage-nav--transitioning {
+  opacity: 0.85;
+  transform: scale(0.99);
+}
+
+
+@keyframes stageNavSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.stage-nav-inner {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   PREVIOUS & NEXT BUTTONS
+   ========================================================= */
+
+.stage-nav-arrow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 8px 18px;
+  height: 38px;
+  box-sizing: border-box;
+
+  border-radius: 12px;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stage-nav-prev-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  color: #334155;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.stage-nav-prev-btn:not(:disabled):hover {
+  background: #ffffff;
+  border-color: #22c55e;
+  color: #166534;
+  transform: translateX(-3px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.18);
+}
+
+.stage-nav-prev-btn:not(:disabled):active {
+  transform: scale(0.96);
+}
+
+.stage-nav-next-btn {
+  background: linear-gradient(135deg, #166534 0%, #22c55e 100%);
+  border: 1px solid #166534;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(34, 197, 94, 0.35);
+}
+
+.stage-nav-next-btn:not(:disabled):hover {
+  background: linear-gradient(135deg, #14532d 0%, #16a34a 100%);
+  transform: translateX(3px);
+  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.45);
+}
+
+.stage-nav-next-btn:not(:disabled):active {
+  transform: scale(0.96);
+}
+
+.stage-nav-arrow-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* =========================================================
+   PROGRESS CONTAINER
+   ========================================================= */
+
+.stage-nav-progress {
+  width: auto;
+  min-width: 240px;
+  max-width: 320px;
+  flex: 0 1 320px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   1 — 2 — 3 CONTAINER
+   ========================================================= */
+
+.stage-nav-steps {
+  position: relative;
+
+  width: 400px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0;
+  margin: 0 auto;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONNECTING LINE
+   ========================================================= */
+
+.stage-nav-track {
+  position: absolute;
+
+  top: 50%;
+  left: 18px;
+  right: 18px;
+
+  height: 3px;
+
+  transform: translateY(-50%);
+
+  background: #e2e8f0;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+  z-index: 0;
+}
+
+
+.stage-nav-track-fill {
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    #22c55e,
+    #4ade80,
+    #86efac
+  );
+
+  border-radius: 999px;
+
+  transition:
+    width 0.6s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   STAGE BUTTON
+   ========================================================= */
+
+.stage-nav-step {
+  position: relative;
+  z-index: 2;
+
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  margin: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+/* Hover */
+
+.stage-nav-step:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+
+/* Click */
+
+.stage-nav-step:not(:disabled):active {
+  transform: scale(0.94);
+}
+
+
+/* Disabled */
+
+.stage-nav-step:disabled {
+  cursor: default;
+}
+
+
+/* =========================================================
+   NUMBER CIRCLE
+   ========================================================= */
+
+.stage-nav-step-dot {
+  position: relative;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border-radius: 50%;
+
+  border: 2px solid #cbd5e1;
+
+  background: #ffffff;
+
+  color: #64748b;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  line-height: 1;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.06);
+
+  transition:
+    all 0.35s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   ACTIVE STAGE
+   ========================================================= */
+
+.stage-nav-step--active .stage-nav-step-dot {
+  border-color: #22c55e;
+
+  background: #ffffff;
+
+  color: #166534;
+
+  box-shadow:
+    0 0 0 4px rgba(34, 197, 94, 0.18),
+    0 4px 16px rgba(34, 197, 94, 0.25);
+
+  animation: stagePulse 2s ease-in-out infinite;
+}
+
+
+@keyframes stagePulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 4px rgba(34, 197, 94, 0.18),
+      0 4px 16px rgba(34, 197, 94, 0.25);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 8px rgba(34, 197, 94, 0.10),
+      0 4px 20px rgba(34, 197, 94, 0.35);
+  }
+}
+
+
+/* =========================================================
+   COMPLETED STAGE
+   ========================================================= */
+
+.stage-nav-step--completed .stage-nav-step-dot {
+  border-color: #22c55e;
+
+  background: linear-gradient(
+    135deg,
+    #166534,
+    #22c55e
+  );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 4px 14px rgba(34, 197, 94, 0.35);
+}
+
+
+/* =========================================================
+   UPCOMING STAGE
+   ========================================================= */
+
+.stage-nav-step--upcoming .stage-nav-step-dot {
+  background: #ffffff;
+
+  color: #64748b;
+
+  border-color: #cbd5e1;
+}
+
+
+/* =========================================================
+   RESULT INDICATOR
+   ========================================================= */
+
+.stage-nav-step-result-dot {
+  position: absolute;
+
+  top: -2px;
+  right: -2px;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  border: 2px solid #ffffff;
+
+  animation: resultDotPulse 2s ease-in-out infinite;
+}
+
+
+@keyframes resultDotPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+
+/* =========================================================
+   RIPPLE EFFECT
+   ========================================================= */
+
+.stage-nav-step--ripple
+  .stage-nav-step-dot::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -6px;
+
+  border-radius: 50%;
+
+  border: 2px solid #22c55e;
+
+  animation: stageRipple 0.6s ease-out both;
+}
+
+
+@keyframes stageRipple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   IMPORTANT:
+   HIDE ALL OLD TEXT / BUTTON UI
+   ========================================================= */
+
+.stage-nav-step-label {
+  display: none !important;
+}
+
+.stage-nav-actions {
+  display: none !important;
+}
+
+.stage-nav-btn {
+  display: none !important;
+}
+
+.stage-nav-header-row {
+  display: none !important;
+}
+
+.stage-nav-header-badges {
+  display: none !important;
+}
+
+.stage-nav-label {
+  display: none !important;
+}
+
+.stage-nav-field-badge {
+  display: none !important;
+}
+
+.stage-nav-history-link {
+  display: none !important;
+}
+
+.stage-nav-hint {
+  display: none !important;
+}
+
+.stage-nav-keyboard-hint {
+  display: none !important;
+}
+
+
+/* =========================================================
+   TRANSITION OVERLAY
+   ========================================================= */
+
+.stage-nav-transition-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(240, 253, 244, 0.55);
+
+  backdrop-filter: blur(4px);
+
+  animation: overlayFadeIn 0.15s ease both;
+
+  pointer-events: none;
+}
+
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   TRANSITION RING
+   ========================================================= */
+
+.stage-nav-transition-ring {
+  position: absolute;
+
+  width: 80px;
+  height: 80px;
+
+  border-radius: 50%;
+
+  border: 3px solid transparent;
+
+  border-top-color: #22c55e;
+  border-right-color: #4ade80;
+
+  animation:
+    transitionSpin
+    0.6s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+@keyframes transitionSpin {
+  from {
+    transform: scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1.2) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   TRANSITION ICON
+   ========================================================= */
+
+.stage-nav-transition-icon {
+  color: #166534;
+
+  animation:
+    transitionIconPop
+    0.5s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+@keyframes transitionIconPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+
+/* =========================================================
+   PAGE ANIMATIONS
+   ========================================================= */
+
+.stage-page-wrapper {
+  position: relative;
+}
+
+
+.stage-page-content {
+  animation:
+    stageContentFade
+    0.4s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+@keyframes stageContentFade {
+  from {
+    opacity: 0.6;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+.stage-page-enter {
+  animation:
+    stagePageEnter
+    0.45s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+@keyframes stagePageEnter {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+.stage-page-enter--back {
+  animation:
+    stagePageEnterBack
+    0.45s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+@keyframes stagePageEnterBack {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .stage-nav {
+    padding: 7px 12px;
+    border-radius: 14px;
+  }
+
+  .stage-nav-inner {
+    gap: 8px;
+  }
+
+  .stage-nav-arrow-btn {
+    padding: 6px 12px;
+    height: 34px;
+    font-size: 12px;
+  }
+
+  .stage-nav-steps {
+    width: 190px;
+    height: 40px;
+  }
+
+  .stage-nav-step {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .stage-nav-step-dot {
+    width: 32px;
+    height: 32px;
+
+    font-size: 12px;
+  }
+
+  .stage-nav-track {
+    left: 16px;
+    right: 16px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .stage-nav {
+    padding: 6px 8px;
+  }
+
+  .stage-nav-arrow-btn {
+    padding: 6px 8px;
+  }
+
+  .stage-nav-arrow-btn span {
+    display: none;
+  }
+
+  .stage-nav-steps {
+    width: 150px;
+  }
+}
